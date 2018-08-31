@@ -1,3 +1,5 @@
+#!/usr/bin/python3.6.5
+
 # Without directly modifying the data structures, create a script in either
 # python or javascript that cycles through all the parents and prints to the
 # terminal the proper activities for their child's age group. When there are no
@@ -39,6 +41,33 @@ activities = [
             ]
     }
 ]
+
+class color:
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   END = '\033[0m'
+
+for father in parents:
+    activities_found = 0
+    kid_age = parents[father].get('age')
+    print(color.BOLD + "Activities for " + father +"'s kid: " + color.END, end="\n")
+
+    if kid_age:
+        for activities_by_age in activities:
+            if activities_by_age.get("age") == kid_age:
+                activities_found = 1
+                print(color.GREEN + "* ", end="")
+                print(*activities_by_age['activity'], sep="\n* ", end=color.END + "\n\n")
+
+        if not activities_found:
+            print(color.YELLOW + "No activities found!\n" + color.END)
+
+    else:
+        print(color.RED + father + " doesn't seem to have a kid!\n" + color.END)
+
+
 
 # Want to really shine and show us your chops?  Work in some of these stretch
 # goals using any tools or libraries you see fit.
